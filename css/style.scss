@@ -1,0 +1,623 @@
+@import "reset.scss";
+@import "setting.scss";
+
+// style
+
+// スクリーン
+.screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: $primary;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  transition: transform 0.5s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.screen-active {
+  transform: translate(-100%, 0);
+}
+
+.container {
+  display: flex;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+h1 {
+  @include mont;
+  letter-spacing: 0.5rem;
+  margin: 0 0 0 -1rem;
+  font-size: 0.8rem;
+  line-height: 1rem; // ハンバーガーと同じ高さに
+  position: absolute;
+  top: 6rem;
+  left: 100%;
+  transform: rotate(90deg);
+  transform-origin: top left;
+  white-space: nowrap;
+}
+
+h2 {
+  @include mont;
+  color: $primary;
+  letter-spacing: 1px;
+  font-size: 1.1rem;
+  margin: 0 0 2rem 0;
+
+  &:before {
+    @include icon;
+    content: "\f105";
+    font-size: 1rem;
+    margin: 0 0.5rem 0 0;
+  }
+}
+
+@media screen and (max-width: 30rem) {
+  h2 {
+    @include mont;
+    color: $primary;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    margin: 0 0 2rem 0;
+
+    &:before {
+      display: none;
+      @include icon;
+      content: "\f105";
+      font-size: 1rem;
+      margin: 0 0.5rem 0 0;
+    }
+  }
+}
+
+h3 {
+  @include mont;
+  letter-spacing: 2px;
+  font-size: 1rem;
+  margin: 0 0 1rem 0;
+
+  &:before {
+    @include icon;
+    content: "\f105";
+    font-size: 1rem;
+    margin: 0 0.5rem 0 0;
+  }
+}
+
+h4 {
+  @include mont;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  margin: 0 0 1rem 0;
+
+  &:before {
+    @include icon;
+    content: "\f105";
+    margin: 0 0.5rem 0 0;
+    font-size: 0.5rem;
+    transform: rotate(90deg);
+  }
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30rem;
+  height: 100%;
+  background: $primary;
+  color: $secondary;
+  z-index: 999;
+  backdrop-filter: blur(5rem);
+  mix-blend-mode: hard-light;
+  transform: translate(-27rem, 0);
+  transition: transform 0.5s cubic-bezier(0.87, 0, 0.13, 1);
+  overflow: auto;
+}
+
+@media screen and (max-width: 30rem) {
+  .menu {
+    width: 20rem;
+    transform: translate(-17rem, 0);
+  }
+}
+
+// アコーディオン
+.works-detail {
+  display: none;
+  background: $secondary;
+  padding: 4rem;
+  color: $primary;
+  width: calc(100% - 8rem);
+  z-index: 2;
+  backdrop-filter: blur(5rem);
+  box-shadow: 0 0 2rem 1rem rgb(0 0 0 / 20%);
+
+  dt {
+    @include mont;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+    margin: 0 0 0.5rem 0;
+
+    &:before {
+      content: "-";
+      margin: 0 0.5rem 0 0;
+    }
+  }
+
+  dd {
+    @include mont;
+    margin: 0 0 2rem 0;
+    font-size: 0.8rem;
+    margin: 0 0 2rem 0;
+    letter-spacing: 1px;
+
+    a {
+      &:hover {
+        color: $accent;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 30rem) {
+  .works-detail {
+    padding: 1rem;
+    width: 100%;
+  }
+}
+
+.works-detail-wrapper {
+  display: flex;
+  gap: 4rem;
+}
+@media screen and (max-width: 30rem) {
+  .works-detail-wrapper {
+    display: block;
+  }
+}
+
+.works-detail-cover {
+  min-width: 50%;
+  max-width: 50%;
+}
+
+@media screen and (max-width: 30rem) {
+  .works-detail-cover {
+    min-width: 100%;
+    max-width: 100%;
+    margin: 0 0 2rem 0;
+  }
+}
+
+.works-detail-active {
+  display: block;
+}
+
+.works-detail-close {
+  @include mont;
+  background: $primary;
+  color: $secondary;
+  position: fixed;
+  top: 2rem;
+  right: 0;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  z-index: 3;
+  letter-spacing: 2px;
+  backdrop-filter: blur(5rem);
+  mix-blend-mode: hard-light;
+  transform: translate(100%, 0);
+  transition: all 0.1s linear;
+  font-size: 0.8rem;
+
+  &:hover {
+    cursor: pointer;
+    background: $accent;
+  }
+
+  &:before {
+    @include icon;
+    content: "\f00d";
+    margin: 0 0.5rem 0 0;
+  }
+}
+
+@media screen and (max-width: 30rem) {
+  .works-detail-close {
+    padding: 0.5rem 1rem;
+  }
+}
+
+.works-detail-close-active {
+  transition: transform 0.5s cubic-bezier(0.87, 0, 0.13, 1);
+  transform: translate(0, 0);
+}
+
+nav {
+  padding: 6rem 5rem 2rem 4rem;
+
+  ul.menu-list {
+    margin: 0 0 0 0;
+
+    li {
+      a {
+        @include mont;
+        letter-spacing: 2px;
+        line-height: 2rem;
+        font-weight: bold;
+        font-size: 0.8rem;
+
+        &:before {
+          @include icon;
+          content: "\f105";
+          margin: 0 0.5rem 0 0;
+          font-size: 0.5rem;
+        }
+
+        &:hover {
+          color: $accent;
+          transition: all 0.1s linear;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 30rem) {
+  nav {
+    padding: 6rem 3rem 2rem 2rem;
+  }
+}
+
+// 自己紹介
+.aboutus {
+  border-top: 1px dotted $secondary;
+  margin: 2rem 0;
+  padding: 2rem 0;
+
+  p {
+    font-size: 0.8rem;
+    line-height: 1.5rem;
+    letter-spacing: 1px;
+    margin: 0 0 2rem 0;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
+
+.aboutus-active {
+  width: 100%;
+}
+
+// ハンバーガー
+.toggle-button {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+  z-index: 1;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+button {
+  width: 1rem;
+  height: 2px;
+  background: $secondary;
+  position: relative;
+  border: none; // これでボーダーをリセット！
+
+  transition: transform 0.5s cubic-bezier(0.87, 0, 0.13, 1);
+
+  &:before {
+    content: "";
+    width: 1rem;
+    height: 2px;
+    background: $secondary;
+    position: absolute;
+    top: -0.5rem;
+    left: 0;
+
+    transition: transform 0.5s cubic-bezier(0.87, 0, 0.13, 1);
+  }
+
+  &:after {
+    content: "";
+    width: 1rem;
+    height: 2px;
+    background: $secondary;
+    position: absolute;
+    top: 0.5rem;
+    left: 0;
+    transition: transform 0.5s cubic-bezier(0.87, 0, 0.13, 1);
+  }
+}
+
+.toggle-button-active {
+  button {
+    width: 1rem;
+    height: 0; // ここを変更
+    background: $secondary;
+    position: relative;
+    border: none; // これでボーダーをリセット！
+
+    &:before {
+      content: "";
+      width: 1rem;
+      height: 2px;
+      background: $secondary;
+      position: absolute;
+      top: 0; // これを変更
+      left: 0;
+
+      transform: rotate(135deg); // これを追加
+    }
+
+    &:after {
+      content: "";
+      width: 1rem;
+      height: 2px;
+      background: $secondary;
+      position: absolute;
+      top: 0; // これを変更
+      left: 0;
+
+      transform: rotate(-135deg); // これを追加
+    }
+  }
+}
+
+.menu-active {
+  transform: translate(0, 0);
+}
+// ハンバーガーここまで
+
+.content {
+  padding: 4rem;
+  margin: 0 0 0 3rem; // ヘッダーからの距離を確保
+}
+
+@media screen and (max-width: 30rem) {
+  .content {
+    padding: 2rem;
+    margin: 0px 0 0 3rem;
+    width: calc(100%);
+  }
+}
+
+section {
+  padding: 2rem 0;
+  margin: 2rem 0;
+}
+
+@media screen and (max-width: 30rem) {
+  section {
+    padding: 2rem 0;
+    margin: 0 0 0 0;
+  }
+}
+
+.works {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 30rem) {
+  .works {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+}
+
+.works-list {
+  max-width: calc(100% / 5 - 2rem);
+  position: relative;
+  transition: all 0.1s linear;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    border: 1px solid transparent;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scale(1, 1);
+    transition: all 0.1s linear;
+  }
+
+  &:hover {
+    transform: scale(0.98);
+
+    &:before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      border: 2px solid $primary;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: scale(1.05, 1.05);
+    }
+  }
+}
+
+@media screen and (max-width: 80rem) {
+  .works-list {
+    max-width: calc(100% / 3 - 2rem);
+  }
+}
+
+@media screen and (max-width: 30rem) {
+  .works-list {
+    max-width: calc(100% / 2 - 0.5rem);
+  }
+}
+
+.works-list-noclick {
+  z-index: -1;
+  opacity: 0.25 !important;
+}
+
+.works-cover {
+  background: $secondary;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+  }
+}
+
+.detail-title {
+  @include mont;
+  font-size: 0.6rem;
+  letter-spacing: 1px;
+  font-weight: bold;
+  color: $secondary;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 2rem);
+  mix-blend-mode: hard-light;
+  //  backdrop-filter: blur(2px);
+  position: absolute;
+  bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:after {
+    @include icon;
+    content: "\f105";
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 30rem) {
+  .detail-title {
+    display: none;
+  }
+}
+
+.text-box-content {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 2rem 2rem;
+
+  li {
+    @include mont;
+    font-weight: bold;
+    margin: 0 0 0.5rem 0;
+    font-size: 0.8rem !important;
+
+    a {
+      transition: all 0.1s linear;
+      border-bottom: 1px solid transparent;
+
+      &:hover {
+        color: $accent;
+        border-bottom: 1px solid $accent;
+      }
+    }
+
+    &:after {
+      content: "/";
+      margin: 0 0.25rem;
+      padding: 0 0.25rem;
+    }
+
+    &:last-child {
+      &:after {
+        content: "";
+      }
+    }
+  }
+}
+
+.copyright-year {
+  font-size: 0.8rem;
+}
+
+// プログレスバー
+-progress {
+  display: block;
+  width: 100%;
+  height: 0.25rem;
+  margin: 0 0 2rem 0;
+}
+
+/* プログレスバーのリセット */
+-progress[value] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+-progress[value]::-webkit-progress-bar {
+  background-color: #eeeeee;
+  border-radius: 0;
+}
+
+-progress[value]::-webkit-progress-value {
+  background: $accent;
+  border-radius: 0;
+}
+
+// コンタクト
+.contact-list {
+  margin: 0 0 2rem;
+
+  li {
+    margin: 0 0 1rem 0;
+
+    a {
+      display: block;
+      border: 2px solid $secondary;
+      padding: 0 1rem;
+      background: $primary;
+      color: $secondary;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: all 0.1s linear;
+      height: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        background: $accent;
+      }
+    }
+  }
+}
+
+.contact-mail {
+  a {
+    font-size: 0.8rem;
+  }
+}
+
+.contact-crowdworks {
+  a {
+    img {
+      height: 0.8rem !important;
+      margin: auto;
+    }
+  }
+}
