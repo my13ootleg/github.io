@@ -1,7 +1,7 @@
 $(function () {
   setTimeout(function () {
     $(".screen").addClass("screen-active", 500);
-  }, 500); // 500ミリ秒後に
+  }, 500);
 });
 
 $(".toggle-button").on("click", function () {
