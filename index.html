@@ -35,6 +35,7 @@
           <ul class="menu-list">
             <li><a href="#client">CLIENT WORKS</a></li>
             <li><a href="#private">PRIVATE WORKS</a></li>
+            <li><a href="#youtube">YOUTUBE</a></li>
             <li><a href="#profile">PROFILE</a></li>
             <li><a href="roadmap/index.html" class="top-transition">ROADMAP</a></li>
           </ul>
@@ -711,6 +712,19 @@
           </ul>
         </section>
 
+        <section id="youtube">
+          <h2>YOUTUBE</h2>
+          <div class="youtube-container">
+            <div class="youtube-list-container">
+              <ul class="youtube-list"></ul>
+            </div>
+
+            <div class="youtube-more">
+              <a href="https://www.youtube.com/@13ootleg/featured" target="_blank">MORE VIDEO</a>
+            </div>
+          </div>
+        </section>
+
         <section id="profile">
           <h2>PROFILE</h2>
           <div class="second-container">
@@ -759,5 +773,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.12.1/rellax.min.js"></script>
     <script src="js/script.min.js"></script>
+
+    <script>
+      // YouTubeの動画を取得する
+      $(function () {
+        id = "UCu_tQJop1SRj3D4EXegCg3w";
+        url = "http://www.youtube.com/feeds/videos.xml?channel_id=" + id;
+        $.ajax({
+          url: "https://api.rss2json.com/v1/api.json?rss_url=" + encodeURIComponent(url),
+          dataType: "json",
+          success: function (data) {
+            if (data.status == "ok") {
+              $.each(data.items, function (i, item) {
+                var id = item.guid;
+                id = id.replace("yt:video:", "");
+                $(".youtube-list").append('<li><iframe src="https://youtube.com/embed/' + id + '?controls=0&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe></li>');
+              });
+            }
+          },
+        });
+      });
+    </script>
   </body>
 </html>
